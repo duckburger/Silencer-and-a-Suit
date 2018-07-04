@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: de5105ebe5651394daffef20a252c60d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -188,3 +188,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e5c3e3351397448a9ebdbc2473f695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterPrefab: {fileID: 1587279296593597695, guid: b256f1e95e42b79478b03bb90138bf7d,
+    type: 3}

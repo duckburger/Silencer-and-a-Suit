@@ -11,7 +11,10 @@ public class CharMovement : MonoBehaviour {
     [SerializeField] Transform legs;
     [SerializeField] Transform body;
 
-	
+
+    Quaternion lastBodyRot;
+    Quaternion lastLegsRot;
+
     void Start()
     {
         if (myRigidBody == null)
@@ -20,26 +23,52 @@ public class CharMovement : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update() {
 
         float verticalMovement = Input.GetAxis("Vertical");
         float horizMovement = Input.GetAxis("Horizontal");
+        float bodyAngle = 0;
+        float legsAngle = 0;
         Vector3 movementVector = new Vector3(horizMovement, verticalMovement, 0);
+        //Debug.Log("Movement vector is " + movementVector);
         myRigidBody.AddForce(movementVector * movementSpeed);
 
         if (body != null)
         {
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            body.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            bodyAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //Debug.Log("body angle is " + bodyAngle);
+            body.rotation = Quaternion.AngleAxis(bodyAngle, Vector3.forward);
         }
 
         if (legs != null)
-        {
-            float angle = Mathf.Atan2(movementVector.y, movementVector.x) * Mathf.Rad2Deg;
-            legs.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        {   if (verticalMovement > 0 || horizMovement > 0)
+            {
+                legsAngle = Mathf.Atan2(movementVector.y, movementVector.x) * Mathf.Rad2Deg;
+                //Debug.Log("legs angle is " + legsAngle);
+                legs.rotation = Quaternion.AngleAxis(legsAngle, Vector3.forward);
+            }
+            
         }
+
+        //float diff = bodyAngle - legsAngle;
+        //if (Mathf.Abs(diff) > 75)
+        //{
+        //    // Rotate legs with body if the angle is too steep
+        //    legs.rotation = body.rotation;
+        //}
+
+        lastBodyRot = body.rotation;
+        lastLegsRot = legs.rotation;
     }
+
+    private void LateUpdate()
+    {
+        body.rotation = lastBodyRot;
+        legs.rotation = lastLegsRot;
+    }
+
+
 }
