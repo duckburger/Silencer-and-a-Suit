@@ -8,8 +8,8 @@ public class CharMovement : MonoBehaviour {
     [SerializeField] float movementSpeed;
 
     [Header("BODY PARTS")]
-    [SerializeField] Transform legs;
-    [SerializeField] Transform body;
+    public Transform legs;
+    public Transform body;
 
 
     Quaternion lastBodyRot;
@@ -63,6 +63,7 @@ public class CharMovement : MonoBehaviour {
         lastBodyRot = body.rotation;
         lastLegsRot = legs.rotation;
     }
+  
 
     private void LateUpdate()
     {

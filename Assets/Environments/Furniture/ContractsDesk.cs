@@ -16,7 +16,6 @@ public class ContractsDesk : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        Debug.Log("Distance to player is " + Vector2.Distance(this.transform.position, player.position));
         if (Vector2.Distance(this.transform.position, player.position) < 2f)
         {
             if (!myAnimator.GetBool("playerNear"))

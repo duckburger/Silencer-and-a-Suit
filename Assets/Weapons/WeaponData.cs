@@ -17,4 +17,11 @@ public class WeaponData : ScriptableObject {
     public List<AudioClip> fireSounds = new List<AudioClip>();
     public float usageCooldown;
     public weaponTypes weapongType;
+
+    public float meleeSlideDistance;
+
+    [Header("Melee params")]
+    public int startDashTimer;
+    public int dashTimer;
+    public float dashDistance;
 }

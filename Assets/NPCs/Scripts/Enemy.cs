@@ -2,26 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, IKillable {
 
     [SerializeField] GameObject deadBodyPrefab;
     [SerializeField] AudioClip myDeathSound;
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (collider.gameObject.tag == "Bullet")
         {
-            SpawnDeadBody(collision);
-            Destroy(gameObject);
+            Debug.Log("got hit by a bullet!");
+            Die(collider);
         }
     }
 
-    private void SpawnDeadBody(Collision2D collision)
+    private void Die(Collider2D collider = null)
     {
-        GameObject newDeadBod = Instantiate(deadBodyPrefab, this.transform.position, collision.transform.rotation);
+        SpawnDeadBody(collider);
+        Destroy(gameObject);
+    }
+
+    public void GetDamaged()
+    {
+        Die();
+    }
+
+    private void SpawnDeadBody(Collider2D collision = null)
+    {
+        GameObject newDeadBod;
+        if (collision != null)
+        {
+            newDeadBod = Instantiate(deadBodyPrefab, this.transform.position, collision.transform.rotation);
+        }
+        else
+        {
+            newDeadBod = Instantiate(deadBodyPrefab, this.transform.position, this.transform.rotation);
+        }
+       
         AudioSource deadBodyAudioSource = newDeadBod.GetComponent<AudioSource>();
         deadBodyAudioSource.clip = myDeathSound;
         deadBodyAudioSource.Play();
     }
+
+
+    
 }
