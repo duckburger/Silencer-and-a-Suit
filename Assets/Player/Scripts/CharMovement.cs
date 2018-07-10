@@ -34,6 +34,9 @@ public class CharMovement : MonoBehaviour {
         //Debug.Log("Movement vector is " + movementVector);
         myRigidBody.AddForce(movementVector * movementSpeed);
 
+       
+
+
         if (body != null)
         {
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -53,12 +56,14 @@ public class CharMovement : MonoBehaviour {
             
         }
 
-        //float diff = bodyAngle - legsAngle;
-        //if (Mathf.Abs(diff) > 75)
-        //{
-        //    // Rotate legs with body if the angle is too steep
-        //    legs.rotation = body.rotation;
-        //}
+        // Find angle between legs' dir and  body's dir
+        float diff = Mathf.Abs(body.rotation.z * Mathf.Rad2Deg - legs.rotation.z * Mathf.Rad2Deg);
+
+        if (diff >= 30)
+        {
+            legs.rotation = body.rotation;
+        }
+
 
         lastBodyRot = body.rotation;
         lastLegsRot = legs.rotation;

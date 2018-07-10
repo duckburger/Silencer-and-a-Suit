@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    [SerializeField] Rigidbody2D myRigidbody;
+
     [SerializeField] float speed;
     [SerializeField] float despawnTime = 3f;
+    [SerializeField] LayerMask hitMask;
 
     Vector3 posLastFrame = Vector3.zero;
     public Vector3 direction;
 
+    private void Awake()
+    {
+        RaycastHit2D bulletFlightRaycast = Physics2D.Raycast(this.transform.position, direction, 0.1f, hitMask);
+        if (bulletFlightRaycast.collider != null)
+        {
+            Debug.Log("Bullet hit something: " + bulletFlightRaycast.collider.gameObject.name);
+            IDamageable damageableEntity = bulletFlightRaycast.collider.GetComponent<IDamageable>();
+            if (damageableEntity != null)
+            {
+                damageableEntity.GetDamaged();
+            }
+            Destroy(gameObject);
+            }
+        }
 
     // Use this for initialization
-    void Start () {
-        if (myRigidbody == null)
-        {
-            myRigidbody = GetComponent<Rigidbody2D>();
-        }
-        myRigidbody.AddForce(direction * speed);
-        StartCoroutine(TimerForDespawn());
-
-        
+    void Start ()
+    {
+        StartCoroutine(TimerForDespawn());  
     }
 
     IEnumerator TimerForDespawn()
@@ -30,31 +39,26 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    
+    private void Update()
+    {
+        FlyAndCheckForCollisions();
+    }
 
-    // Update is called once per frame
-    void FixedUpdate () {
-
-        if (posLastFrame != Vector3.zero)
+    void FlyAndCheckForCollisions()
+    {
+        this.transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+        RaycastHit2D bulletFlightRaycast = Physics2D.Raycast(this.transform.position, direction, 0.2f, hitMask);
+        Physics2D.Linecast(this.transform.position, direction * Time.deltaTime * 0.2f, hitMask);
+        if (bulletFlightRaycast.collider != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(posLastFrame, transform.position, (transform.position - posLastFrame).magnitude);
-            if (hit != false)
+            Debug.Log("Bullet hit something: " + bulletFlightRaycast.collider.gameObject.name);
+            IDamageable damageableEntity = bulletFlightRaycast.collider.GetComponent<IDamageable>();
+            if (damageableEntity != null)
             {
-                Debug.Log("Bullet hit " + hit.collider.gameObject.name);
-                IKillable killableObj = hit.collider.GetComponent<IKillable>();
-                if (killableObj != null)
-                {
-                    Debug.Log("Hit a killable character");
-                    killableObj.GetDamaged();
-                }
-
-                if (hit.collider.gameObject.layer != 9 && hit.collider.gameObject.layer != 8)
-                {
-                    Destroy(gameObject);
-                }
+                damageableEntity.GetDamaged();
             }
-        }
-        posLastFrame = transform.position;
+            DestroyImmediate(gameObject);
 
+        }
     }
 }

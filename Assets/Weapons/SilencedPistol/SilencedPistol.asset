@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1602496332262247762, guid: 4aeeaf9a91b731c4caefb7f9e0ccb3e6,
     type: 3}
+  projectileTrail: {fileID: 4315909642461203955, guid: d596e92f83fbece4eb76eb1f01f9e492,
+    type: 3}
   fireSounds:
   - {fileID: 8300000, guid: 886f6a91871111842a8decaa617707b5, type: 3}
   - {fileID: 8300000, guid: 1edb8c30389136f4c8e1782b63911569, type: 3}
-  usageCooldown: 1
+  usageCooldown: 0.3
   weapongType: 1
+  meleeSlideDistance: 0
+  startDashTimer: 0
+  dashTimer: 0
+  dashDistance: 0

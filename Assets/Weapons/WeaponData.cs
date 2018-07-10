@@ -14,6 +14,7 @@ public enum weaponTypes
 public class WeaponData : ScriptableObject {
 
     public GameObject projectile;
+    public GameObject projectileTrail;
     public List<AudioClip> fireSounds = new List<AudioClip>();
     public float usageCooldown;
     public weaponTypes weapongType;

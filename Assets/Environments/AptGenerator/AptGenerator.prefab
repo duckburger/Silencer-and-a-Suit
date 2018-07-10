@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3076855734897130624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8083683264829885956}
+  - component: {fileID: 3076855734897130625}
+  m_Layer: 0
+  m_Name: AptGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8083683264829885956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076855734897130624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.967255, y: -1.2902184, z: -0.03305394}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3076855734897130625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076855734897130624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d517401f3f19b2e42b5af3a531a43332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseRoomPrefabs:
+  - {fileID: 7434637670159672295, guid: 79861658626deb64bb33c62e89533108, type: 3}
+  topCorridorPrefabs: []
+  bottomCorridorPrefabs: []
+  leftCorridorPrefabs: []
+  rightCorridorPrefabs: []
+  topRoomPrefabs:
+  - {fileID: 3357479716152402824, guid: 24357d43dea61f24b8a5c968b066173f, type: 3}
+  - {fileID: 9140443225223971199, guid: 5bb2cca22fd40574f92bfd5f033d891c, type: 3}
+  bottomRoomPrefabs:
+  - {fileID: 3357479716152402824, guid: 24357d43dea61f24b8a5c968b066173f, type: 3}
+  - {fileID: 9140443225223971199, guid: 5bb2cca22fd40574f92bfd5f033d891c, type: 3}
+  leftRoomPrefabs:
+  - {fileID: 3357479716152402824, guid: 24357d43dea61f24b8a5c968b066173f, type: 3}
+  - {fileID: 9140443225223971199, guid: 5bb2cca22fd40574f92bfd5f033d891c, type: 3}
+  rightRoomPrefabs:
+  - {fileID: 3357479716152402824, guid: 24357d43dea61f24b8a5c968b066173f, type: 3}
+  - {fileID: 9140443225223971199, guid: 5bb2cca22fd40574f92bfd5f033d891c, type: 3}
+  minFloors: 1
+  maxFloors: 5
+  minRoomsPerFloor: 1
+  maxRoomsPerFloor: 3

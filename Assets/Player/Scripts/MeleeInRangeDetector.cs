@@ -5,12 +5,12 @@ using UnityEngine;
 public class MeleeInRangeDetector : MonoBehaviour {
 
     bool isInMeleeRange;
-    List<IKillable> objectsInRange = new List<IKillable>();
+    List<IDamageable> objectsInRange = new List<IDamageable>();
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
         Debug.Log(obj.gameObject.name + " has entered the melee range");
-        IKillable killableObj = obj.gameObject.GetComponent<IKillable>();
+        IDamageable killableObj = obj.gameObject.GetComponent<IDamageable>();
         if (killableObj != null)
         {
             isInMeleeRange = true;
@@ -23,7 +23,7 @@ public class MeleeInRangeDetector : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D obj)
     {
-        if (obj.gameObject.GetComponent<IKillable>() != null)
+        if (obj.gameObject.GetComponent<IDamageable>() != null)
         {
             isInMeleeRange = true;
         }
@@ -33,7 +33,7 @@ public class MeleeInRangeDetector : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D obj)
     {
-        IKillable killableObj = obj.gameObject.GetComponent<IKillable>();
+        IDamageable killableObj = obj.gameObject.GetComponent<IDamageable>();
         if (killableObj != null)
         {
             isInMeleeRange = false;
@@ -44,7 +44,7 @@ public class MeleeInRangeDetector : MonoBehaviour {
         }
     }
 
-    public List<IKillable> GetListOfObjInMeleeRange()
+    public List<IDamageable> GetListOfObjInMeleeRange()
     {
         return objectsInRange;
     }

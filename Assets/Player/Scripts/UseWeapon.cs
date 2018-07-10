@@ -10,6 +10,7 @@ public class UseWeapon : MonoBehaviour {
     [SerializeField] AudioSource weaponAudioSource;
     [SerializeField] Rigidbody2D myRigidbody;
     [SerializeField] MeleeInRangeDetector meleeRangeDetector;
+    [SerializeField] LayerMask immediateFrontMask;
 
     bool weap1InUse;
     bool weap2InUse;
@@ -46,6 +47,16 @@ public class UseWeapon : MonoBehaviour {
             weap1InUse = true;
             weaponAudioSource.clip = equippedWeapon1.fireSounds[Random.Range(0, equippedWeapon1.fireSounds.Count)];
             weaponAudioSource.Play();
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 dir = Input.mousePosition - pos;
+
+            RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
+            if (immediateFrontCheck.collider != null)
+            {
+                Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
+                StartCoroutine(Weapon1Cooldon());
+                return;
+            }
             // Actually do the shooting/hitting
             switch (equippedWeapon1.weapongType)
             {
@@ -54,11 +65,10 @@ public class UseWeapon : MonoBehaviour {
                     break;
                 case weaponTypes.Ranged:
 
-                    Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-                    Vector3 dir = Input.mousePosition - pos;
                     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                     Quaternion newRotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
+                    //WeaponEffects(equippedWeapon1);
                     Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, newRotation).GetComponent<Bullet>();
                     newBullet.direction = dir;
                     break;
@@ -67,6 +77,7 @@ public class UseWeapon : MonoBehaviour {
             }
 
             StartCoroutine(Weapon1Cooldon());
+            
         }
     }
 
@@ -78,36 +89,47 @@ public class UseWeapon : MonoBehaviour {
             weaponAudioSource.clip = equippedWeapon2.fireSounds[Random.Range(0, equippedWeapon2.fireSounds.Count)];
             weaponAudioSource.Play();
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 dir = Input.mousePosition - pos;
+
+            RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
+            if (immediateFrontCheck.collider != null)
+            {
+                Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
+                StartCoroutine(Weapon2Cooldon());
+                return;
+            }
             // Actually do the shooting/hitting
             switch (equippedWeapon2.weapongType)
-            {
-                case weaponTypes.Melee:
-                    // Dash forward towards mouse, draw a sphere in fron and kill people in sphere
+                {
+                    case weaponTypes.Melee:
+                        // Dash forward towards mouse, draw a sphere in fron and kill people in sphere
 
-                    GetComponent<CharMovement>().body.GetComponent<Animator>().SetTrigger("swordAttack");
-                    List<IKillable> inRangeList = meleeRangeDetector.GetListOfObjInMeleeRange();
-                    if (inRangeList.Count > 0)
-                    {
-                        foreach(IKillable obj in inRangeList.ToArray())
+                        GetComponent<CharMovement>().body.GetComponent<Animator>().SetTrigger("swordAttack");
+                        List<IDamageable> inRangeList = meleeRangeDetector.GetListOfObjInMeleeRange();
+                        if (inRangeList.Count > 0)
                         {
-                            obj.GetDamaged();
+                            foreach (IDamageable obj in inRangeList.ToArray())
+                            {
+                                obj.GetDamaged();
+                            }
                         }
-                    }
 
-                    break;
-                case weaponTypes.Ranged:
-                    Vector3 dir = Input.mousePosition - pos;
-                    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                    Quaternion towardsMouseRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                    Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
-                    Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
-                    newBullet.direction = dir;
-                    break;
-                default:
-                    break;
-            }
+                        break;
+                    case weaponTypes.Ranged:
+                        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        Quaternion towardsMouseRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
+                        //WeaponEffects(equippedWeapon2);
+                        Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
+                        newBullet.direction = dir;
+
+                        break;
+                    default:
+                        break;
+                }
 
             StartCoroutine(Weapon2Cooldon());
+            
         }
     }
 
@@ -122,5 +144,10 @@ public class UseWeapon : MonoBehaviour {
     {
         yield return new WaitForSeconds(equippedWeapon2.usageCooldown);
         weap2InUse = false;
+    }
+
+    void WeaponEffects(WeaponData weaponToUse)
+    {
+        Instantiate(weaponToUse.projectileTrail, projectileStartPos.position, projectileStartPos.rotation);
     }
 }

@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!224 &774378121 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2474373894482917407, guid: 736d2aced367bd9488ece32795b048c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2474373893709589142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &519420031 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4532178662330210467, guid: 3993d7912f97d324094ada4a6877e844,
+    type: 3}
+  m_PrefabInstance: {fileID: 4532178661951512796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &323282458
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,43 +85,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!1 &547826333 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4752986324957100157, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-    type: 3}
-  m_PrefabInstance: {fileID: 4752986324081584087}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &547826334 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4752986324957100156, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-    type: 3}
-  m_PrefabInstance: {fileID: 4752986324081584087}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &547826336
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547826333}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eea0539f0306f2a4c91e51a4533a4326, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!224 &774378121 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2474373894482917407, guid: 736d2aced367bd9488ece32795b048c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2474373893709589142}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1164035552
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,72 +192,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4752986324081584087}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &519420031 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4532178662330210467, guid: 3993d7912f97d324094ada4a6877e844,
-    type: 3}
-  m_PrefabInstance: {fileID: 4532178661951512796}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2021026955
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2021026956}
-  - component: {fileID: 2021026958}
-  - component: {fileID: 2021026957}
-  m_Layer: 8
-  m_Name: MeleeWeapCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2021026956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021026955}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 547826334}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2021026958
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021026955}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.56, y: 0.03}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &2021026957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021026955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a50f71f5cf88f6b4c825ecdea8aec90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!29 &1
 OcclusionCullingSettings:
   m_ObjectHideFlags: 0
@@ -878,48 +787,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Char
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752986324833939511, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: equippedWeapon1
-      value: 
-      objectReference: {fileID: 11400000, guid: 549e8dbdddb335945b49e5222455879b,
-        type: 2}
-    - target: {fileID: 4752986324833939511, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: equippedWeapon2
-      value: 
-      objectReference: {fileID: 11400000, guid: 21cec63b285fbc7428e7b817407cd022,
-        type: 2}
-    - target: {fileID: 4752986324833939511, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: meleeRangeDetector
-      value: 
-      objectReference: {fileID: 2021026957}
-    - target: {fileID: 4752986324957100157, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752986324713508976, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752986324547043162, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752986324833939464, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752986324293713123, guid: 81e4a06c88ac65742b7fd6fcaff07127,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81e4a06c88ac65742b7fd6fcaff07127, type: 3}

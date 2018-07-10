@@ -2,20 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IKillable {
+public class Enemy : MonoBehaviour, IDamageable {
 
     [SerializeField] GameObject deadBodyPrefab;
     [SerializeField] AudioClip myDeathSound;
 
-
-    public void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Bullet")
-        {
-            Debug.Log("got hit by a bullet!");
-            Die(collider);
-        }
-    }
 
     private void Die(Collider2D collider = null)
     {
