@@ -28,17 +28,16 @@ public class CharMovement : MonoBehaviour {
 
         float verticalMovement = Input.GetAxis("Vertical");
         float horizMovement = Input.GetAxis("Horizontal");
-        float bodyAngle = 0;
-        float legsAngle = 0;
+        
+        
         Vector3 movementVector = new Vector3(horizMovement, verticalMovement, 0);
         //Debug.Log("Movement vector is " + movementVector);
         myRigidBody.AddForce(movementVector * movementSpeed);
 
-       
-
-
+    
         if (body != null)
         {
+            float bodyAngle = 0;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
             bodyAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -47,13 +46,8 @@ public class CharMovement : MonoBehaviour {
         }
 
         if (legs != null)
-        {   if (verticalMovement > 0 || horizMovement > 0)
-            {
-                legsAngle = Mathf.Atan2(movementVector.y, movementVector.x) * Mathf.Rad2Deg;
-                //Debug.Log("legs angle is " + legsAngle);
-                legs.rotation = Quaternion.AngleAxis(legsAngle, Vector3.forward);
-            }
-            
+        {
+            TurnLegsInLineWithControls();
         }
 
         // Find angle between legs' dir and  body's dir
@@ -64,11 +58,31 @@ public class CharMovement : MonoBehaviour {
             legs.rotation = body.rotation;
         }
 
-
         lastBodyRot = body.rotation;
         lastLegsRot = legs.rotation;
     }
-  
+
+    void TurnLegsInLineWithControls()
+    {
+        float vertMovement = Input.GetAxis("Vertical");
+        float horMovement = Input.GetAxis("Horizontal");
+        Vector3 moveVector = new Vector3(horMovement, vertMovement, 0);
+        if (vertMovement > 0 || horMovement > 0)
+        {
+            float legsAngle = 0;
+            legsAngle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
+            //Debug.Log("legs angle is " + legsAngle);
+            legs.rotation = Quaternion.AngleAxis(legsAngle, Vector3.forward);
+        }
+    }
+
+    public void TurnLegsInLineWithBody()
+    {
+        Vector3 bodyEulerAngles = new Vector3(body.eulerAngles.x, body.eulerAngles.y, body.eulerAngles.z);
+        legs.eulerAngles = bodyEulerAngles;
+        Debug.Log("Turned the legs to " + bodyEulerAngles  + " rotation");
+        lastLegsRot = legs.rotation;
+    }
 
     private void LateUpdate()
     {

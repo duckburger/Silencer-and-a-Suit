@@ -26,4 +26,4 @@ MonoBehaviour:
   dashTimer: 0
   dashDistance: 0
   idleStateName: Idle_Unarmed
-  attackAnimTrigger: sec_attack_kick
+  attackAnimTrigger: sec_attack

@@ -12,6 +12,7 @@ public class UseWeapon : MonoBehaviour {
     [SerializeField] MeleeInRangeDetector meleeRangeDetector;
     [SerializeField] LayerMask immediateFrontMask;
     [SerializeField] Animator myAnimator;
+    [SerializeField] CharMovement myMovementController;
 
     bool weap1InUse;
     bool weap2InUse;
@@ -21,6 +22,7 @@ public class UseWeapon : MonoBehaviour {
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myMovementController = GetComponent<CharMovement>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class UseWeapon : MonoBehaviour {
 
     public void AdjustAnimationsForNewWeapons()
     {
+        // Grabs the idle state name from the primary weapon in the pack
         myAnimator.Play(equippedWeapon1.idleStateName);
     }
 
@@ -71,7 +74,7 @@ public class UseWeapon : MonoBehaviour {
             weap1InUse = true;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
-
+            myMovementController.TurnLegsInLineWithBody();
             RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
             if (immediateFrontCheck.collider != null)
             {
@@ -112,7 +115,7 @@ public class UseWeapon : MonoBehaviour {
             weap2InUse = true;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
-
+            myMovementController.TurnLegsInLineWithBody();
             RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
             if (immediateFrontCheck.collider != null)
             {
@@ -146,6 +149,7 @@ public class UseWeapon : MonoBehaviour {
     }
     #endregion
 
+  
     public void DamageEnemiesInMeleeRange()
     {
         List<IDamageable> inRangeList = meleeRangeDetector.GetListOfObjInMeleeRange();

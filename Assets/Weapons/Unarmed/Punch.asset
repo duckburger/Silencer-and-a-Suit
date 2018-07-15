@@ -26,4 +26,4 @@ MonoBehaviour:
   dashTimer: 0
   dashDistance: 0
   idleStateName: Idle_Unarmed
-  attackAnimTrigger: prim_attack_punch
+  attackAnimTrigger: prim_attack

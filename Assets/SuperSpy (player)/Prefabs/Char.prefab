@@ -45,9 +45,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4242133, y: 0.06033981}
+  m_Offset: {x: 0.625285, y: 0.06033981}
   serializedVersion: 2
-  m_Radius: 0.5342847
+  m_Radius: 0.73535645
 --- !u!114 &2021026957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +410,8 @@ MonoBehaviour:
   immediateFrontMask:
     serializedVersion: 2
     m_Bits: 1024
-  bodyAnimator: {fileID: 0}
+  myAnimator: {fileID: 0}
+  myMovementController: {fileID: 0}
 --- !u!114 &1636784697
 MonoBehaviour:
   m_ObjectHideFlags: 0
