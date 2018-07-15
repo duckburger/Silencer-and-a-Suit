@@ -32,29 +32,25 @@ public class AptGenerator : MonoBehaviour {
         {
             GenerateFloor();
         }
+        Debug.Log("Generated an apartment with " + floorsToMake + " floors.");
     }
 
     private void GenerateFloor()
     {
         // Determing amount of rooms on this floor
         int roomsToMake = Random.Range(minRoomsPerFloor, maxRoomsPerFloor);
-        //bool rotated = RandomizeDecision();
+        bool rotated = RandomizeDecision();
         int baseRoomIndex = Random.Range(0, baseRoomPrefabs.Count - 1);
         GameObject newBaseRoom = Instantiate(baseRoomPrefabs[baseRoomIndex], Vector2.zero, Quaternion.identity);
-        //if (rotated)
-        //{
-        //    newBaseRoom.transform.Rotate(Vector3.forward, 90);
-        //}
-
+        if (rotated)
+        {
+            newBaseRoom.transform.Rotate(Vector3.forward, 90);
+        }
         // Go through each attachment point and fill it randomly up to the overall room limit
+        int roomsSpawned = 0;
         List<Transform> baseRoomAttachmentPoints = newBaseRoom.GetComponent<RoomData>().GetAttachmentPoints();
         for (int i = 0; i < roomsToMake; i++)
         {
-            bool isSpawning = RandomizeDecision();
-            if (!isSpawning)
-            {
-                continue;
-            }
             int index = Random.Range(0, baseRoomAttachmentPoints.Count);
             RoomAttachmentPoint currAttachmentPoint = baseRoomAttachmentPoints[index].GetComponent<RoomAttachmentPoint>();
             if (!currAttachmentPoint.isOccupied)
@@ -65,20 +61,52 @@ public class AptGenerator : MonoBehaviour {
                 switch (sideOfAttachmentPoint)
                 {
                     case CardinalSide.Left:
-                        roomIndex = Random.Range(0, leftRoomPrefabs.Count);
-                        prefabsListToUse = leftRoomPrefabs;
+                        if (!rotated)
+                        {
+                            roomIndex = Random.Range(0, leftRoomPrefabs.Count);
+                            prefabsListToUse = leftRoomPrefabs;
+                        }
+                        else
+                        {
+                            roomIndex = Random.Range(0, bottomRoomPrefabs.Count);
+                            prefabsListToUse = bottomRoomPrefabs;
+                        }
                         break;
                     case CardinalSide.Right:
-                        roomIndex = Random.Range(0, rightRoomPrefabs.Count);
-                        prefabsListToUse = rightRoomPrefabs;
+                        if (!rotated)
+                        {
+                            roomIndex = Random.Range(0, rightRoomPrefabs.Count);
+                            prefabsListToUse = rightRoomPrefabs;
+                        }
+                        else
+                        {
+                            roomIndex = Random.Range(0, topRoomPrefabs.Count);
+                            prefabsListToUse = topRoomPrefabs;
+                        }
                         break;
                     case CardinalSide.Bottom:
-                        roomIndex = Random.Range(0, bottomRoomPrefabs.Count);
-                        prefabsListToUse = bottomRoomPrefabs;
+                        if (!rotated)
+                        {
+                            roomIndex = Random.Range(0, bottomRoomPrefabs.Count);
+                            prefabsListToUse = bottomRoomPrefabs;
+                        }
+                        else
+                        {
+                            roomIndex = Random.Range(0, rightRoomPrefabs.Count);
+                            prefabsListToUse = rightRoomPrefabs;
+                        }
                         break;
                     case CardinalSide.Top:
-                        roomIndex = Random.Range(0, topRoomPrefabs.Count);
-                        prefabsListToUse = topRoomPrefabs;
+                        if (!rotated)
+                        {
+                            roomIndex = Random.Range(0, topRoomPrefabs.Count);
+                            prefabsListToUse = topRoomPrefabs;
+                        }
+                        else
+                        {
+                            roomIndex = Random.Range(0, leftRoomPrefabs.Count);
+                            prefabsListToUse = leftRoomPrefabs;
+                        }
                         break;
                     default:
                         break;
@@ -86,15 +114,16 @@ public class AptGenerator : MonoBehaviour {
                 GameObject roomToSpawn = prefabsListToUse[roomIndex];
                 currAttachmentPoint.isOccupied = true;
                 GameObject newRoom = Instantiate(roomToSpawn, currAttachmentPoint.transform.position, Quaternion.identity, currAttachmentPoint.transform);
-                CalcOffsetAndMoveNewRoom(newRoom, sideOfAttachmentPoint, currAttachmentPoint.transform);
+                roomsSpawned++;
+                CalcOffsetAndMoveNewRoom(newRoom, sideOfAttachmentPoint, currAttachmentPoint.transform, rotated);
             }
             else
             {
                 continue;
             }
-            
-            
-        }  
+        }
+
+        Debug.Log("Generated a floor with " + roomsToMake + " rooms.");
 
     }
 
@@ -104,38 +133,58 @@ public class AptGenerator : MonoBehaviour {
     }
 
 
-    void CalcOffsetAndMoveNewRoom(GameObject objToMove, CardinalSide sideOfAttachmentPoint, Transform originalRoomAttachPoint)
+    void CalcOffsetAndMoveNewRoom(GameObject objToMove, CardinalSide sideOfBaseAttachPoint, Transform originalRoomAttachPoint, bool isBaseRotated)
     {
         List<Transform> attachmentPoints = objToMove.GetComponent<RoomData>().GetAttachmentPoints();
         Vector2 pos1 = originalRoomAttachPoint.position;
         Vector2 pos2 = Vector2.zero;
         foreach(Transform point in attachmentPoints)
         {
-            switch (sideOfAttachmentPoint)
+            switch (sideOfBaseAttachPoint)
             {
                 case CardinalSide.Left:
-                    if(point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Right)
+                    if(point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Right && !isBaseRotated)
+                    {
+                        pos2 = point.position;
+                        break;
+                    }
+                    else if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Top && isBaseRotated)
                     {
                         pos2 = point.position;
                         break;
                     }
                     break;
                 case CardinalSide.Right:
-                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Left)
+                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Left && !isBaseRotated)
+                    {
+                        pos2 = point.position;
+                        break;
+                    }
+                    else if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Bottom && isBaseRotated)
                     {
                         pos2 = point.position;
                         break;
                     }
                     break;
                 case CardinalSide.Bottom:
-                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Top)
+                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Top && !isBaseRotated)
+                    {
+                        pos2 = point.position;
+                        break;
+                    }
+                    else if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Left && isBaseRotated)
                     {
                         pos2 = point.position;
                         break;
                     }
                     break;
                 case CardinalSide.Top:
-                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Bottom)
+                    if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Bottom && !isBaseRotated)
+                    {
+                        pos2 = point.position;
+                        break;
+                    }
+                    else if (point.GetComponent<RoomAttachmentPoint>().GetMyCardinalSide() == CardinalSide.Right && isBaseRotated)
                     {
                         pos2 = point.position;
                         break;

@@ -12,4 +12,5 @@ public class BulletTrail : MonoBehaviour {
         transform.Translate(Vector3.right * Time.deltaTime * speed);
         Destroy(gameObject, 0.3f);
 	}
+    
 }

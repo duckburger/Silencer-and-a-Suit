@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c46e80ceca769458bc673b828fa9b1, type: 3}
   m_Name: SilencedPistol
   m_EditorClassIdentifier: 
+  weaponIcon: {fileID: 21300000, guid: 8568c9d3ee4c1c0439ac2ae3c5e4d6a6, type: 3}
   projectile: {fileID: 1602496332262247762, guid: 4aeeaf9a91b731c4caefb7f9e0ccb3e6,
     type: 3}
   projectileTrail: {fileID: 4315909642461203955, guid: d596e92f83fbece4eb76eb1f01f9e492,
     type: 3}
-  fireSounds:
+  usageSounds:
   - {fileID: 8300000, guid: 886f6a91871111842a8decaa617707b5, type: 3}
   - {fileID: 8300000, guid: 1edb8c30389136f4c8e1782b63911569, type: 3}
   usageCooldown: 0.3
@@ -25,3 +26,5 @@ MonoBehaviour:
   startDashTimer: 0
   dashTimer: 0
   dashDistance: 0
+  idleStateName: 
+  attackAnimTrigger: 
