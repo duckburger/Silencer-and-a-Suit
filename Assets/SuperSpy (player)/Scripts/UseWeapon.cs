@@ -118,6 +118,10 @@ public class UseWeapon : MonoBehaviour {
                 Quaternion newRotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
                 //WeaponEffects(equippedWeapon1);
+                if (equippedWeapon1.inaccuracyRadius > 0)
+                {
+                    newRotation = GenerateRotWithInaccuracy(equippedWeapon1, newRotation);
+                }
                 Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, newRotation).GetComponent<Bullet>();
                 newBullet.direction = dir;
                 break;
@@ -155,7 +159,11 @@ public class UseWeapon : MonoBehaviour {
                 Quaternion towardsMouseRotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
                 //WeaponEffects(equippedWeapon2);
-                Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
+                if (equippedWeapon2.inaccuracyRadius > 0)
+                {
+                    towardsMouseRotation = GenerateRotWithInaccuracy(equippedWeapon2, towardsMouseRotation);
+                }
+                Bullet newBullet = Instantiate(equippedWeapon2.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
                 newBullet.direction = dir;
 
                 break;
@@ -213,5 +221,12 @@ public class UseWeapon : MonoBehaviour {
     void WeaponEffects(WeaponData weaponToUse)
     {
         Instantiate(weaponToUse.projectileTrail, projectileStartPos.position, projectileStartPos.rotation);
+    }
+
+    Quaternion GenerateRotWithInaccuracy(WeaponData weapon, Quaternion initialBulletRot)
+    {
+        float randomizedBulletAnlge = Random.Range(-weapon.inaccuracyRadius, weapon.inaccuracyRadius);
+        Quaternion angleAdjustmentForInnacuracy = Quaternion.Euler(0, 0, randomizedBulletAnlge);
+        return angleAdjustmentForInnacuracy * initialBulletRot;
     }
 }

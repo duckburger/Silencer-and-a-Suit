@@ -23,6 +23,7 @@ public class WeaponData : ScriptableObject {
     public weaponTypes weapongType;
     public bool stopsMovement;
     public float meleeSlideDistance;
+    public float inaccuracyRadius;
 
     [Header("Melee params")]
     public int startDashTimer;
