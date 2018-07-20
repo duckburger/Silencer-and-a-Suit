@@ -6,6 +6,7 @@ public class CharMovement : MonoBehaviour {
 
     [SerializeField] Rigidbody2D myRigidBody;
     [SerializeField] float movementSpeed;
+    [SerializeField] bool isMobile;
 
     [Header("BODY PARTS")]
     public Transform legs;
@@ -25,16 +26,23 @@ public class CharMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (isMobile)
+        {
+            HandleMovement();
+        }
 
+    }
+
+    private void HandleMovement()
+    {
         float verticalMovement = Input.GetAxis("Vertical");
         float horizMovement = Input.GetAxis("Horizontal");
-        
-        
+
         Vector3 movementVector = new Vector3(horizMovement, verticalMovement, 0);
         //Debug.Log("Movement vector is " + movementVector);
         myRigidBody.AddForce(movementVector * movementSpeed);
 
-    
+
         if (body != null)
         {
             float bodyAngle = 0;
@@ -80,8 +88,17 @@ public class CharMovement : MonoBehaviour {
     {
         Vector3 bodyEulerAngles = new Vector3(body.eulerAngles.x, body.eulerAngles.y, body.eulerAngles.z);
         legs.eulerAngles = bodyEulerAngles;
-        Debug.Log("Turned the legs to " + bodyEulerAngles  + " rotation");
         lastLegsRot = legs.rotation;
+    }
+
+    public void TurnOffMovement()
+    {
+        isMobile = false;
+    }
+
+    public void TurnOnMovement()
+    {
+        isMobile = true;
     }
 
     private void LateUpdate()

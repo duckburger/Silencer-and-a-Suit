@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ac56ada4cd6a8eb4da57289b7b0428a1, type: 3}
   usageCooldown: 0.7
   weapongType: 0
+  stopsMovement: 1
   meleeSlideDistance: 0
   startDashTimer: 0
   dashTimer: 0

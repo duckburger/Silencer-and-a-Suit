@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c46e80ceca769458bc673b828fa9b1, type: 3}
+  m_Name: WristDarts
+  m_EditorClassIdentifier: 
+  weaponIcon: {fileID: 21300000, guid: 462d171d97f4c544c89b9eacc3181b5b, type: 3}
+  projectile: {fileID: 1602496332262247762, guid: 93d03c1ad93d54f47a51aa279bb02ecc,
+    type: 3}
+  projectileTrail: {fileID: 0}
+  usageSounds:
+  - {fileID: 8300000, guid: 4ac102f8d2ab2304ebffb4d17a5bc083, type: 3}
+  - {fileID: 8300000, guid: 5bd9a787ae1ddc24b947841ebd9ccb6a, type: 3}
+  usageCooldown: 1
+  weapongType: 1
+  stopsMovement: 0
+  meleeSlideDistance: 0
+  startDashTimer: 0
+  dashTimer: 0
+  dashDistance: 0
+  idleStateName: Idle_WristDarts
+  attackAnimTrigger: prim_attack

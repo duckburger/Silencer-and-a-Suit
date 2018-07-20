@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1804533641979998230}
   - component: {fileID: 1745092800519648419}
   - component: {fileID: 5127087077767759981}
+  - component: {fileID: 5823249454910525237}
+  - component: {fileID: 1433878329}
   m_Layer: 0
   m_Name: BadGuy1
   m_TagString: Untagged
@@ -32,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 6854683337692812075}
   - {fileID: 5722710711854999123}
+  - {fileID: 5297121749782073143}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,9 +87,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d3ad3db6273fe469e3b4181c28f345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myAudioSource: {fileID: 1433878329}
+  myAnimator: {fileID: 5823249454910525237}
   deadBodyPrefab: {fileID: 6176248156401808568, guid: bb89d89d171bdcd4f9e3f83698bbe513,
     type: 3}
   myDeathSound: {fileID: 8300000, guid: 18a20955bcc82064c8072d75e8df7e50, type: 3}
+  myKnockOutSound: {fileID: 8300000, guid: 363e0f50979ae744687ae46940338e72, type: 3}
+  myZzzzs: {fileID: 3678825476745921466}
+--- !u!95 &5823249454910525237
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551835292729535082}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a513db774799cac46998746baaac207b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &1433878329
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551835292729535082}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &3678825476745921466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5889563329782446845, guid: 66d014ba6d30ef648bf57e492fbd608a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7112941807461235015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5297121749782073143 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3113419773397038704, guid: 66d014ba6d30ef648bf57e492fbd608a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7112941807461235015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4894765014583906557
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,3 +536,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &7112941807461235015
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  m_Modification:
+    m_TransformParent: {fileID: 8101903359817313853}
+    m_Modifications:
+    - target: {fileID: 5889563329782446845, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113419773397038704, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113419773397038704, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113419773397038704, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113419773397038704, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893363459232436343, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893363459232436343, guid: 66d014ba6d30ef648bf57e492fbd608a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66d014ba6d30ef648bf57e492fbd608a, type: 3}

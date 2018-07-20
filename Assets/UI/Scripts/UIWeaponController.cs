@@ -8,13 +8,15 @@ public class UIWeaponController : MonoBehaviour {
     [SerializeField] UseWeapon playerWeaponController;
     [SerializeField] Image currentWeaponUIIcon;
 
-    private void Start()
+    private void Awake()
     {
         if (playerWeaponController == null)
         {
             playerWeaponController = GameObject.FindGameObjectWithTag("Player").GetComponent<UseWeapon>();
         }
     }
+
+ 
 
     public void UpdateCurrentWeaponUI()
     {

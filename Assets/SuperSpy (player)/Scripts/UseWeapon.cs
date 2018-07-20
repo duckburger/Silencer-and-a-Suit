@@ -17,8 +17,7 @@ public class UseWeapon : MonoBehaviour {
     bool weap1InUse;
     bool weap2InUse;
 
-
-    private void Start()
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -55,7 +54,7 @@ public class UseWeapon : MonoBehaviour {
         equippedWeapon2 = null;
     }
 
-    public void AdjustAnimationsForNewWeapons()
+    public void SetupIdleAnimationStateForNewWeapons()
     {
         // Grabs the idle state name from the primary weapon in the pack
         myAnimator.Play(equippedWeapon1.idleStateName);
@@ -67,89 +66,108 @@ public class UseWeapon : MonoBehaviour {
     }
 
     #region Using weapons
+
     void UseCurrentWeapon1()
     {
         if (!weap1InUse && equippedWeapon1 != null)
         {
             weap1InUse = true;
-            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 dir = Input.mousePosition - pos;
-            myMovementController.TurnLegsInLineWithBody();
-            RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
-            if (immediateFrontCheck.collider != null)
-            {
-                Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
-                StartCoroutine(Weapon1Cooldone());
-                return;
-            }
-            // Actually do the shooting/hitting
-            switch (equippedWeapon1.weapongType)
-            {
-                case weaponTypes.Melee:
-                    // Handled inside the animator
-                    break;
-                case weaponTypes.Ranged:
-
-                    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                    Quaternion newRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                    Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
-                    //WeaponEffects(equippedWeapon1);
-                    Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, newRotation).GetComponent<Bullet>();
-                    newBullet.direction = dir;
-                    break;
-                default:
-                    break;
-            }
-
             myAnimator.SetTrigger(equippedWeapon1.attackAnimTrigger);
-            StartCoroutine(Weapon1Cooldone());
-            
+            StartCoroutine(Weapon1Cooldown());
         }
     }
-
 
     void UseCurrentWeapon2()
     {
         if (!weap2InUse && equippedWeapon2 != null)
         {
             weap2InUse = true;
-            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 dir = Input.mousePosition - pos;
-            myMovementController.TurnLegsInLineWithBody();
-            RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
-            if (immediateFrontCheck.collider != null)
-            {
-                Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
-                StartCoroutine(Weapon2Cooldone());
-                return;
-            }
-            // Actually do the shooting/hitting
-            switch (equippedWeapon2.weapongType)
-                {
-                    case weaponTypes.Melee:
-                        // Handled inside the animator
-                        break;
-                    case weaponTypes.Ranged:
-                        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                        Quaternion towardsMouseRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                        Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
-                        //WeaponEffects(equippedWeapon2);
-                        Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
-                        newBullet.direction = dir;
-
-                        break;
-                    default:
-                        break;
-                }
-
             myAnimator.SetTrigger(equippedWeapon2.attackAnimTrigger);
-            StartCoroutine(Weapon2Cooldone());
-            
+            StartCoroutine(Weapon2Cooldown());
         }
+    }
+
+
+
+    // Called fromt he animator during the animation
+    public void AnimWeapon1Activate()
+    {
+        if (equippedWeapon1.stopsMovement)
+        {
+            myMovementController.TurnOffMovement();
+        }
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = Input.mousePosition - pos;
+        myMovementController.TurnLegsInLineWithBody();
+        RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
+        if (immediateFrontCheck.collider != null)
+        {
+            Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
+            StartCoroutine(Weapon1Cooldown());
+            return;
+        }
+        // Actually do the shooting/hitting
+        switch (equippedWeapon1.weapongType)
+        {
+            case weaponTypes.Melee:
+                // Handled inside the animator
+                break;
+            case weaponTypes.Ranged:
+
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                Quaternion newRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
+                //WeaponEffects(equippedWeapon1);
+                Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, newRotation).GetComponent<Bullet>();
+                newBullet.direction = dir;
+                break;
+            default:
+                break;
+        }
+    }
+
+    
+    // Called fromt he animator during the animation
+    public void AnimWeapon2Activate()
+    {
+        if (equippedWeapon2.stopsMovement)
+        {
+            myMovementController.TurnOffMovement();
+        }
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = Input.mousePosition - pos;
+        myMovementController.TurnLegsInLineWithBody();
+        RaycastHit2D immediateFrontCheck = Physics2D.Raycast(projectileStartPos.position, dir, 0.2f, immediateFrontMask);
+        if (immediateFrontCheck.collider != null)
+        {
+            Debug.Log("You are standing right in front of an environment object! I am not even spawning that bullet!");
+            StartCoroutine(Weapon2Cooldown());
+            return;
+        }
+        // Actually do the shooting/hitting
+        switch (equippedWeapon2.weapongType)
+        {
+            case weaponTypes.Melee:
+                // Handled inside the animator
+                break;
+            case weaponTypes.Ranged:
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                Quaternion towardsMouseRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
+                //WeaponEffects(equippedWeapon2);
+                Bullet newBullet = Instantiate(equippedWeapon1.projectile, bulletPos, towardsMouseRotation).GetComponent<Bullet>();
+                newBullet.direction = dir;
+
+                break;
+            default:
+                break;
+        }
+
     }
     #endregion
 
-  
+
+
     public void DamageEnemiesInMeleeRange()
     {
         List<IDamageable> inRangeList = meleeRangeDetector.GetListOfObjInMeleeRange();
@@ -170,15 +188,25 @@ public class UseWeapon : MonoBehaviour {
     }
 
 
-    IEnumerator Weapon1Cooldone()
+    IEnumerator Weapon1Cooldown()
     {
         yield return new WaitForSeconds(equippedWeapon1.usageCooldown);
+        if (equippedWeapon1.stopsMovement)
+        {
+            myMovementController.TurnOnMovement();
+        }
         weap1InUse = false;
+        Debug.Log("Setting the weapon 1 in use to " + weap1InUse);
+
     }
 
-    IEnumerator Weapon2Cooldone()
+    IEnumerator Weapon2Cooldown()
     {
         yield return new WaitForSeconds(equippedWeapon2.usageCooldown);
+        if (equippedWeapon2.stopsMovement)
+        {
+            myMovementController.TurnOnMovement();
+        }
         weap2InUse = false;
     }
 

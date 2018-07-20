@@ -21,7 +21,7 @@ public class WeaponData : ScriptableObject {
     public List<AudioClip> usageSounds = new List<AudioClip>();
     public float usageCooldown;
     public weaponTypes weapongType;
-
+    public bool stopsMovement;
     public float meleeSlideDistance;
 
     [Header("Melee params")]

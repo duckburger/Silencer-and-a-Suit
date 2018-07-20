@@ -386,7 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 4752986324833939508}
-  movementSpeed: 20
+  movementSpeed: 28
+  isMobile: 1
   legs: {fileID: 4752986324547043161}
   body: {fileID: 4752986324957100156}
 --- !u!114 &4752986324833939511
@@ -402,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedWeapon1: {fileID: 11400000, guid: 549e8dbdddb335945b49e5222455879b, type: 2}
-  equippedWeapon2: {fileID: 11400000, guid: 21cec63b285fbc7428e7b817407cd022, type: 2}
+  equippedWeapon2: {fileID: 0}
   projectileStartPos: {fileID: 4752986324293713122}
   weaponAudioSource: {fileID: 4752986324713508990}
   myRigidbody: {fileID: 0}
@@ -427,6 +428,7 @@ MonoBehaviour:
   punch: {fileID: 11400000, guid: dc77b5a396151014c9cef87473a934b1, type: 2}
   kick: {fileID: 11400000, guid: 6c2169d86033e674d89c069b7845836c, type: 2}
   silencedPistol: {fileID: 11400000, guid: 549e8dbdddb335945b49e5222455879b, type: 2}
+  wristDarts: {fileID: 11400000, guid: d3db882026335ed429b5fd0924302ae6, type: 2}
   useWeaponController: {fileID: 4752986324833939511}
   switchedWeaponsEvent: {fileID: 11400000, guid: 3905c29536a02e640b7c0085e0fff77d,
     type: 2}
@@ -447,7 +449,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4752986324833939511}
-        m_MethodName: AdjustAnimationsForNewWeapons
+        m_MethodName: SetupIdleAnimationStateForNewWeapons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

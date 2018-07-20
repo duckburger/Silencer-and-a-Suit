@@ -224,6 +224,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 1079
+  isLethal: 1
   direction: {x: 0, y: 0, z: 0}
 --- !u!1001 &4011920508758836179
 PrefabInstance:

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-
     [SerializeField] float speed;
     [SerializeField] float despawnTime = 3f;
     [SerializeField] LayerMask hitMask;
-
+    [Space(10)]
+    [Header("Lethality")]
+    [SerializeField] bool isLethal;
+    [Space(10)]
+    [Header("Knockout param")]
+    [SerializeField] float knockOutDuration;
     Vector3 posLastFrame = Vector3.zero;
     public Vector3 direction;
 
@@ -33,15 +37,15 @@ public class Bullet : MonoBehaviour {
         StartCoroutine(TimerForDespawn());  
     }
 
+    private void Update()
+    {
+        FlyAndCheckForCollisions();
+    }
+
     IEnumerator TimerForDespawn()
     {
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        FlyAndCheckForCollisions();
     }
 
     void FlyAndCheckForCollisions()
@@ -52,13 +56,26 @@ public class Bullet : MonoBehaviour {
         if (bulletFlightRaycast.collider != null)
         {
             Debug.Log("Bullet hit something: " + bulletFlightRaycast.collider.gameObject.name);
-            IDamageable damageableEntity = bulletFlightRaycast.collider.GetComponent<IDamageable>();
-            if (damageableEntity != null)
+            if (isLethal)
             {
-                damageableEntity.GetDamaged();
+                IDamageable damageableEntity = bulletFlightRaycast.collider.GetComponent<IDamageable>();
+                if (damageableEntity != null)
+                {
+                    damageableEntity.GetDamaged();
+                }
             }
+            else
+            {
+                IKnockable knockoutableEntity = bulletFlightRaycast.collider.GetComponent<IKnockable>();
+                if (knockoutableEntity != null)
+                {
+                    knockoutableEntity.GetKnockedOut(knockOutDuration);
+                }
+            }
+            
             DestroyImmediate(gameObject);
 
         }
     }
+
 }
