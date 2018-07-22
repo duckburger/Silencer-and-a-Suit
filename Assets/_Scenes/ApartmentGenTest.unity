@@ -151,6 +151,13 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &3076855734897130625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3076855734897130625, guid: fe9b47cedef6ec344b4fcfd77f22f53a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2833351077734743863}
+  m_PrefabAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: d517401f3f19b2e42b5af3a531a43332, type: 3}
 --- !u!1 &1620655246
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,13 +367,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3076855734897130625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3076855734897130625, guid: fe9b47cedef6ec344b4fcfd77f22f53a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2833351077734743863}
-  m_PrefabAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: d517401f3f19b2e42b5af3a531a43332, type: 3}
 --- !u!1 &1822966516
 GameObject:
   m_ObjectHideFlags: 0

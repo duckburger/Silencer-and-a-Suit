@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4752986324293713123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.088, y: -0.005, z: 0}
+  m_LocalPosition: {x: 0.145, y: -0.045, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4752986324713508991}
@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedWeapon1: {fileID: 11400000, guid: 549e8dbdddb335945b49e5222455879b, type: 2}
   equippedWeapon2: {fileID: 0}
+  weaponTransform: {fileID: 4752986324713508991}
   projectileStartPos: {fileID: 4752986324293713122}
   weaponAudioSource: {fileID: 4752986324713508990}
   myRigidbody: {fileID: 0}
@@ -429,6 +430,7 @@ MonoBehaviour:
   kick: {fileID: 11400000, guid: 6c2169d86033e674d89c069b7845836c, type: 2}
   silencedPistol: {fileID: 11400000, guid: 549e8dbdddb335945b49e5222455879b, type: 2}
   wristDarts: {fileID: 11400000, guid: d3db882026335ed429b5fd0924302ae6, type: 2}
+  attacheCase: {fileID: 11400000, guid: 75d4e93be1e4f194993a40bd4c3b3214, type: 2}
   useWeaponController: {fileID: 4752986324833939511}
   switchedWeaponsEvent: {fileID: 11400000, guid: 3905c29536a02e640b7c0085e0fff77d,
     type: 2}
@@ -562,7 +564,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: ee21dcec713a9774daaed877522a6e06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa65658251520e9409577726efc2fe92, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

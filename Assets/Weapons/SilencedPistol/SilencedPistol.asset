@@ -13,20 +13,23 @@ MonoBehaviour:
   m_Name: SilencedPistol
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 21300000, guid: 8568c9d3ee4c1c0439ac2ae3c5e4d6a6, type: 3}
-  projectile: {fileID: 1602496332262247762, guid: 4aeeaf9a91b731c4caefb7f9e0ccb3e6,
-    type: 3}
-  projectileTrail: {fileID: 4315909642461203955, guid: d596e92f83fbece4eb76eb1f01f9e492,
-    type: 3}
   usageSounds:
   - {fileID: 8300000, guid: 886f6a91871111842a8decaa617707b5, type: 3}
   - {fileID: 8300000, guid: 1edb8c30389136f4c8e1782b63911569, type: 3}
   usageCooldown: 0.3
   weapongType: 1
+  projectileSpawnLocalPos: {x: 0.145, y: -0.045}
   stopsMovement: 0
   meleeSlideDistance: 0
-  inaccuracyRadius: 10
+  projectile: {fileID: 1602496332262247762, guid: 4aeeaf9a91b731c4caefb7f9e0ccb3e6,
+    type: 3}
+  projectileTrail: {fileID: 4315909642461203955, guid: d596e92f83fbece4eb76eb1f01f9e492,
+    type: 3}
+  inaccuracyRadius: 8
+  automatic: 0
   startDashTimer: 0
   dashTimer: 0
   dashDistance: 0
   idleStateName: Idle_SilencedPistol
   attackAnimTrigger: prim_attack
+  secAnimTrigger: sec_attack

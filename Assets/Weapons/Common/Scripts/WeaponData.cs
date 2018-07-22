@@ -16,14 +16,20 @@ public class WeaponData : ScriptableObject {
 
     public Sprite weaponIcon;
 
-    public GameObject projectile;
-    public GameObject projectileTrail;
+    
     public List<AudioClip> usageSounds = new List<AudioClip>();
     public float usageCooldown;
     public weaponTypes weapongType;
+    public Vector2 projectileSpawnLocalPos;
     public bool stopsMovement;
     public float meleeSlideDistance;
+    
+
+    [Header("Ranged params")]
+    public GameObject projectile;
+    public GameObject projectileTrail;
     public float inaccuracyRadius;
+    public bool automatic;
 
     [Header("Melee params")]
     public int startDashTimer;

@@ -6,6 +6,7 @@ public class UseWeapon : MonoBehaviour {
 
     public WeaponData equippedWeapon1;
     public WeaponData equippedWeapon2;
+    [SerializeField] Transform weaponTransform;
     [SerializeField] Transform projectileStartPos;
     [SerializeField] AudioSource weaponAudioSource;
     [SerializeField] Rigidbody2D myRigidbody;
@@ -26,15 +27,34 @@ public class UseWeapon : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-        if (Input.GetMouseButtonDown(0))
+		if (!equippedWeapon1.automatic)
         {
-            UseCurrentWeapon1();
+            if (Input.GetMouseButtonDown(0))
+            {
+                UseCurrentWeapon1();
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButton(0))
+            {
+                UseCurrentWeapon1();
+            }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (!equippedWeapon2.automatic)
         {
-            UseCurrentWeapon2();
+            if (Input.GetMouseButtonDown(1))
+            {
+                UseCurrentWeapon2();
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButton(1))
+            {
+                UseCurrentWeapon2();
+            }
         }
 	}
 
@@ -52,6 +72,7 @@ public class UseWeapon : MonoBehaviour {
             return;
         }
         equippedWeapon2 = null;
+
     }
 
     public void SetupIdleAnimationStateForNewWeapons()
@@ -69,21 +90,29 @@ public class UseWeapon : MonoBehaviour {
 
     void UseCurrentWeapon1()
     {
-        if (!weap1InUse && equippedWeapon1 != null)
+        if (!equippedWeapon1.automatic && !weap1InUse && equippedWeapon1 != null)
         {
             weap1InUse = true;
             myAnimator.SetTrigger(equippedWeapon1.attackAnimTrigger);
             StartCoroutine(Weapon1Cooldown());
         }
+        else if (equippedWeapon1.automatic && equippedWeapon1 != null)
+        {
+            myAnimator.SetTrigger(equippedWeapon1.attackAnimTrigger);
+        }
     }
 
     void UseCurrentWeapon2()
     {
-        if (!weap2InUse && equippedWeapon2 != null)
+        if (!equippedWeapon2.automatic && !weap2InUse && equippedWeapon2 != null)
         {
             weap2InUse = true;
             myAnimator.SetTrigger(equippedWeapon2.attackAnimTrigger);
             StartCoroutine(Weapon2Cooldown());
+        }
+        else if (equippedWeapon2.automatic && equippedWeapon2 != null)
+        {
+            myAnimator.SetTrigger(equippedWeapon2.attackAnimTrigger);
         }
     }
 
@@ -116,6 +145,11 @@ public class UseWeapon : MonoBehaviour {
 
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion newRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Vector3 newProjectileSpawnPos = new Vector3(equippedWeapon1.projectileSpawnLocalPos.x, equippedWeapon1.projectileSpawnLocalPos.y, 0);
+                if (equippedWeapon1.projectileSpawnLocalPos != Vector2.zero && projectileStartPos.localPosition != newProjectileSpawnPos)
+                {
+                    projectileStartPos.transform.localPosition = newProjectileSpawnPos;
+                }
                 Vector2 bulletPos = new Vector2(projectileStartPos.position.x, projectileStartPos.position.y);
                 //WeaponEffects(equippedWeapon1);
                 if (equippedWeapon1.inaccuracyRadius > 0)

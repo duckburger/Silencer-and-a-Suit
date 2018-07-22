@@ -10,25 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8c46e80ceca769458bc673b828fa9b1, type: 3}
-  m_Name: Punch
+  m_Name: AttacheCase
   m_EditorClassIdentifier: 
-  weaponIcon: {fileID: 21300000, guid: 53cd95fbfc3b458469081e5ef334ca36, type: 3}
+  weaponIcon: {fileID: 21300000, guid: aed1ddd320a91d14b9a982314bb1ea72, type: 3}
   usageSounds:
-  - {fileID: 8300000, guid: 157165bba18ba84498cdbb498e8edb55, type: 3}
-  - {fileID: 8300000, guid: 1dcfb091e4f9d8948b8f3b6cee1b12ba, type: 3}
-  - {fileID: 8300000, guid: ac56ada4cd6a8eb4da57289b7b0428a1, type: 3}
-  usageCooldown: 0.2
-  weapongType: 0
-  projectileSpawnLocalPos: {x: 0, y: 0}
+  - {fileID: 8300000, guid: 985f2a34f17edd74aa0d6f3b8a5f2b1f, type: 3}
+  usageCooldown: 0.01
+  weapongType: 1
+  projectileSpawnLocalPos: {x: -0.44, y: -0.22}
   stopsMovement: 0
   meleeSlideDistance: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 1602496332262247762, guid: b62abfbe6d23f5b49aaf02c57fd83253,
+    type: 3}
   projectileTrail: {fileID: 0}
-  inaccuracyRadius: 0
-  automatic: 0
+  inaccuracyRadius: 10
+  automatic: 1
   startDashTimer: 0
   dashTimer: 0
   dashDistance: 0
-  idleStateName: Idle_Unarmed
+  idleStateName: Idle_AttacheCase
   attackAnimTrigger: prim_attack
   secAnimTrigger: sec_attack

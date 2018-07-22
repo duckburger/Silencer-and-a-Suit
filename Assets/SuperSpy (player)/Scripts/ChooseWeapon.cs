@@ -9,6 +9,7 @@ public class ChooseWeapon : MonoBehaviour {
     [SerializeField] WeaponData kick;
     [SerializeField] WeaponData silencedPistol;
     [SerializeField] WeaponData wristDarts;
+    [SerializeField] WeaponData attacheCase;
 
     [Space(10)]
     [Header("Object refs")]
@@ -39,6 +40,10 @@ public class ChooseWeapon : MonoBehaviour {
         {
             SelectWeapon(3);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SelectWeapon(4);
+        }
     }
 
     void SelectWeapon(int code)
@@ -58,6 +63,9 @@ public class ChooseWeapon : MonoBehaviour {
                 break;
             case 3:
                 useWeaponController.ChangeWeapon(wristDarts, kick);
+                break;
+            case 4:
+                useWeaponController.ChangeWeapon(attacheCase, kick);
                 break;
             default:
                 break;
